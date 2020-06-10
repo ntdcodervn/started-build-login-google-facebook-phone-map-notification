@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>445890970183-fajh92196jlej2q15t3ecccdvmughndv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.445890970183-fajh92196jlej2q15t3ecccdvmughndv</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBUlR0TdJQuyg1VL2cUqXZOmE3y2PFL5Vg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>445890970183</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>vn.datvietsoftware.gas-grab</string>
+	<key>PROJECT_ID</key>
+	<string>gas-grab</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gas-grab.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:445890970183:ios:adde07e499c097690ea762</string>
+	<key>DATABASE_URL</key>
+	<string>https://gas-grab.firebaseio.com</string>
+</dict>
+</plist>

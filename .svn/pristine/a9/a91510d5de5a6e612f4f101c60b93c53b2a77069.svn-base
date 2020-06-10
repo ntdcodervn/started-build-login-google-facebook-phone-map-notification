@@ -1,0 +1,6 @@
+module Pods_gas_grab_gas_grabTests {
+  umbrella header "Pods-gas_grab-gas_grabTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

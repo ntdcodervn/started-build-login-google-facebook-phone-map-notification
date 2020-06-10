@@ -1,0 +1,68 @@
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {
+  HomeScreen,
+  FlashScreen,
+  LoginScreen,
+  ProfileLoginScreen,
+  ChooseStoreScreen,
+  NotificationScreen,
+  NotificationDetailScreen,
+  CartScreen,
+  CompleteScreen,
+  ConfirmScreen,
+  FollowScreen,
+  ProfileScreen,
+  OrderDScreen,
+  HistoryOrderScreen,
+  UpdateScreen,
+  OrderScreen,
+} from './screen';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+const AuthStack = createStackNavigator();
+
+const AuthNav = () => {
+  return (
+    <AuthStack.Navigator>
+      <AuthStack.Screen name="FlashScreen" component={FlashScreen} />
+    </AuthStack.Navigator>
+  );
+};
+
+const LoginStack = createStackNavigator();
+
+const LoginNav = () => {
+  return (
+    <LoginStack.Navigator>
+      <LoginStack.Screen name="LoginScreen" component={FlashScreen} />
+      <LoginStack.Screen
+        name="ProfileLoginScreen"
+        component={ProfileLoginScreen}
+      />
+    </LoginStack.Navigator>
+  );
+};
+
+const BottomTab = createBottomTabNavigator();
+
+const BottomNavigation = () => {
+  return (
+    <BottomTab.Navigator>
+      <BottomTab.Screen name="Home" component={HomeScreen} />
+      <BottomTab.Screen name="Cart" component={CartScreen} />
+      <BottomTab.Screen name="HistoryOrder" component={OrderScreen} />
+      <BottomTab.Screen name="Notification" component={NotificationScreen} />
+      <BottomTab.Screen name="Profile" component={ProfileScreen} />
+    </BottomTab.Navigator>
+  );
+};
+
+export default function MainContainer() {
+  return (
+    <NavigationContainer>
+      <BottomNavigation />
+    </NavigationContainer>
+  );
+}

@@ -1,0 +1,6 @@
+module Pods_gas_grab {
+  umbrella header "Pods-gas_grab-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,156 @@
+import 'react-native-gesture-handler';
+import React, {useEffect,useState} from 'react';
+import {View, TextInput, Text, Button} from 'react-native';
+import OneSignal from 'react-native-onesignal';
+import {LoginButton} from 'react-native-fbsdk';
+import { GoogleSignin, GoogleSigninButton } from '@react-native-community/google-signin';
+import auth from '@react-native-firebase/auth';
+//abc4789asdads
+GoogleSignin.configure();
+var appId = '91992659-9684-4105-9346-44b8423e3520';
+
+GoogleSignin.configure({
+  webClientId:
+    '176806027206-blskkepuvikqps0m64pt4c7v77t94erl.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+  offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+  hostedDomain: '', // specifies a hosted domain restriction
+  forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
+});
+
+
+const App = () => {
+  useEffect(() => {
+    OneSignal.init(appId);
+    OneSignal.setLogLevel(6, 0);
+
+    // Replace 'YOUR_ONESIGNAL_APP_ID' with your OneSignal App ID.
+    OneSignal.init('YOUR_ONESIGNAL_APP_ID', {
+      kOSSettingsKeyAutoPrompt: false,
+      kOSSettingsKeyInAppLaunchURL: false,
+      kOSSettingsKeyInFocusDisplayOption: 2,
+    });
+    OneSignal.inFocusDisplaying(2); // Controls what should happen if a notification is received while the app is open. 2 means that the notification will go directly to the device's notification center.
+
+    // The promptForPushNotifications function code will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step below)
+    OneSignal.promptForPushNotificationsWithUserResponse(myiOSPromptCallback);
+
+    OneSignal.addEventListener('received', onReceived);
+    OneSignal.addEventListener('opened', onOpened);
+    OneSignal.addEventListener('ids', onIds);
+
+    return () => {
+      OneSignal.removeEventListener('received', onReceived);
+      OneSignal.removeEventListener('opened', onOpened);
+      OneSignal.removeEventListener('ids', onIds);
+    };
+  }, []);
+
+  const onReceived = notification => {
+    console.log('Notification received: ', notification);
+  };
+
+  const onOpened = openResult => {
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+  };
+
+  const onIds = device => {
+    console.log('Device info: ', device);
+  };
+
+  const myiOSPromptCallback = (permission) => {
+    // do something with permission value
+  }
+
+  const signIn =  async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      this.setState({ userInfo });
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
+  };
+
+  
+  const [confirm, setConfirm] = useState(null);
+
+  const [code, setCode] = useState('');
+
+  // Handle the button press
+  async function signInWithPhoneNumber(phoneNumber) {
+    const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+    setConfirm(confirmation);
+  }
+
+  async function confirmCode() {
+    try {
+      await confirm.confirm(code);
+    } catch (error) {
+      console.log('Invalid code.');
+    }
+  }
+
+  const renderPhoneAuth = () => {
+    if (!confirm) {
+      return (
+        <Button
+          title="Phone Number Sign In"
+          onPress={() => signInWithPhoneNumber('+84 378 203 738')}
+        />
+      );
+    }
+  
+    return (
+      <>
+        <TextInput value={code} onChangeText={text => setCode(text)} />
+        <Button title="Confirm Code" onPress={() => confirmCode()} />
+      </>
+    );
+  }
+
+  return (
+    <View style={{flex : 1 , justifyContent : 'center', alignItems : 'center'}}>
+      <LoginButton
+          onLoginFinished={
+            (error, result) => {
+              if (error) {
+                console.log("login has error: " + result.error);
+              } else if (result.isCancelled) {
+                console.log("login is cancelled.");
+              } else {
+                AccessToken.getCurrentAccessToken().then(
+                  (data) => {
+                    console.log(data.accessToken.toString())
+                  }
+                )
+              }
+            }
+          }
+          onLogoutFinished={() => console.log("logout.")}/>
+
+          <View style={{marginTop : 10}}>
+            
+            <GoogleSigninButton onPress={signIn}/>
+          </View>
+
+          <View style={{marginTop : 10}}>
+            
+            {renderPhoneAuth()}
+          </View>
+
+    </View>
+  );
+};
+
+export default App;

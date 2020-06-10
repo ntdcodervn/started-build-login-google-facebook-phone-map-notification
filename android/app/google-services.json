@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "445890970183",
+    "firebase_url": "https://gas-grab.firebaseio.com",
+    "project_id": "gas-grab",
+    "storage_bucket": "gas-grab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445890970183:android:8b54339822ccf3ba0ea762",
+        "android_client_info": {
+          "package_name": "com.gas_grab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "445890970183-gmhkmhc2t4qhd2sft1sqn86as9jvk180.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYb8j3d1n8s3lPIkhLZmmWBhS1TKokYuw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445890970183-gmhkmhc2t4qhd2sft1sqn86as9jvk180.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
